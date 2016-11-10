@@ -36,14 +36,15 @@ public class antifraud {
             if (distance == 0) {
                 System.out.println("Would you like to pay yourself?");
             } else if (distance != 1) {
-                System.out.println("unverified");
+                System.out.println("unverified: You've never had a transaction with this user before. Are you sure you would like to proceed with this payment?");
+                //TODO: write output to file and read from test
             } else {
                 System.out.println("trusted");
+                //TODO: write output to file and read from test
             }
         }
     }
 
-    //TODO: write output to file and read from test
 
     public void feature2(File inputData) throws FileNotFoundException {
         Scanner sc = new Scanner(inputData);
@@ -53,10 +54,14 @@ public class antifraud {
             int distance = paymentService.makePayment(parseInputData(sc.nextLine()), this.graphDB);
             if (distance == 0) {
                 System.out.println("Would you like to pay yourself?");
-            } else if (distance != 2) {
-                System.out.println("unverified");
+            } else if (distance > 2) {
+                System.out.println("unverified: This user is not a friend or a \"friend of a friend\". Are you sure you would like to proceed with this payment?");
+                //TODO: write output to file and read from test
+
             } else {
                 System.out.println("trusted");
+                //TODO: write output to file and read from test
+
             }
         }
     }
@@ -72,9 +77,13 @@ public class antifraud {
             if (distance == 0) {
                 System.out.println("Would you like to pay yourself?");
             } else if (distance > 4) {
-                System.out.println("unverified");
+                System.out.println("unverified: This user is outside from your \"4th degree friends network. Are you sure you would like to proceed with this payment?");
+                //TODO: write output to file and read from test
+
             } else {
                 System.out.println("trusted");
+                //TODO: write output to file and read from test
+
             }
         }
     }
