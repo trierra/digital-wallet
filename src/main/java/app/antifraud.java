@@ -1,6 +1,7 @@
 package app;
 
 import app.service.PaymentService;
+import app.storage.GraphDB;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +9,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
-import static app.Utils.parseInputData;
+import static app.service.serviceUtils.Utils.parseInputData;
 
 /**
  * Created by trierra on 11/9/16 for

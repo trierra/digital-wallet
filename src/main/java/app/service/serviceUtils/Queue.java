@@ -1,4 +1,4 @@
-package app;
+package app.service.serviceUtils;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

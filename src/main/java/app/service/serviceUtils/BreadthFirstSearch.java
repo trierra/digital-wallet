@@ -1,4 +1,6 @@
-package app;
+package app.service.serviceUtils;
+
+import app.storage.GraphDB;
 
 import java.util.Stack;
 

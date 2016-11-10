@@ -1,7 +1,7 @@
 package app.service;
 
-import app.BreadthFirstSearch;
-import app.GraphDB;
+import app.service.serviceUtils.BreadthFirstSearch;
+import app.storage.GraphDB;
 
 import java.io.FileNotFoundException;
 

@@ -1,7 +1,7 @@
 package app.tests;
 
-import app.BreadthFirstSearch;
-import app.GraphDB;
+import app.service.serviceUtils.BreadthFirstSearch;
+import app.storage.GraphDB;
 import app.antifraud;
 
 import java.io.File;

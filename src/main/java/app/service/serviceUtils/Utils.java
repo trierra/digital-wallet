@@ -1,4 +1,4 @@
-package app;
+package app.service.serviceUtils;
 
 /**
  * Created by trierra on 11/9/16 for
