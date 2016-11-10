@@ -23,7 +23,7 @@ public class antifraud {
     private PaymentService paymentService;
 
     public antifraud(File file, int graphSize) throws FileNotFoundException {
-        this.graphDB = new GraphDB(new Scanner(file), graphSize);
+        this.graphDB = new GraphDB(file, graphSize);
         this.paymentService = new PaymentService();
     }
 

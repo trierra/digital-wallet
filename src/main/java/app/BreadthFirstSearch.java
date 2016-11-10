@@ -13,7 +13,6 @@ public class BreadthFirstSearch {
         distTo = new int[G.getVertexes()];
         edgeTo = new int[G.getVertexes()];
         bfs(G, s);
-//        assert check(G, s);
     }
 
 
@@ -56,49 +55,4 @@ public class BreadthFirstSearch {
         path.push(x);
         return path;
     }
-
-
-//    // check optimality conditions for single source
-//    private boolean check(GraphDB G, int s) {
-//
-//        // check that the distance of s = 0
-//        if (distTo[s] != 0) {
-//            System.out.println("distance of source " + s + " to itself = " + distTo[s]);
-//            return false;
-//        }
-//
-//        // check that for each edge v-w dist[w] <= dist[v] + 1
-//        // provided v is reachable from s
-//        for (int v = 0; v < G.getVertexes(); v++) {
-//            for (int w : G.getAdjacencyList(v)) {
-//                if (hasPathTo(v) != hasPathTo(w)) {
-//                    System.out.println("edge " + v + "-" + w);
-//                    System.out.println("hasPathTo(" + v + ") = " + hasPathTo(v));
-//                    System.out.println("hasPathTo(" + w + ") = " + hasPathTo(w));
-//                    return false;
-//                }
-//                if (hasPathTo(v) && (distTo[w] > distTo[v] + 1)) {
-//                    System.out.println("edge " + v + "-" + w);
-//                    System.out.println("distTo[" + v + "] = " + distTo[v]);
-//                    System.out.println("distTo[" + w + "] = " + distTo[w]);
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        // check that v = edgeTo[w] satisfies distTo[w] = distTo[v] + 1
-//        // provided v is reachable from s
-//        for (int w = 0; w < G.getVertexes(); w++) {
-//            if (!hasPathTo(w) || w == s) continue;
-//            int v = edgeTo[w];
-//            if (distTo[w] != distTo[v] + 1) {
-//                System.out.println("shortest path edge " + v + "-" + w);
-//                System.out.println("distTo[" + v + "] = " + distTo[v]);
-//                System.out.println("distTo[" + w + "] = " + distTo[w]);
-//                return false;
-//            }
-//        }
-//
-//        return true;
-//    }
 }

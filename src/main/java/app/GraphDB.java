@@ -1,5 +1,7 @@
 package app;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -10,7 +12,8 @@ public class GraphDB {
     private int vertexes;
     private LinkedList<Integer>[] adj;
 
-    public GraphDB(Scanner in, int vertexes) {
+    public GraphDB(File batchPayment, int vertexes) throws FileNotFoundException {
+        Scanner in = new Scanner(batchPayment);
 
         this.vertexes = vertexes;
         adj = (LinkedList<Integer>[]) new LinkedList[vertexes];

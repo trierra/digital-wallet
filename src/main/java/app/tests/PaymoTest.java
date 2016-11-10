@@ -7,7 +7,6 @@ import app.antifraud;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.Scanner;
 
 /**
  * Created by trierra on 11/9/16 for
@@ -15,9 +14,12 @@ import java.util.Scanner;
  */
 public class PaymoTest {
 
+    static String pathToBatchTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/batch_test.txt";
+    static String pathToFeatureTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/features.test";
+
 
     public static void graphTest() throws FileNotFoundException {
-        GraphDB graphDB = new GraphDB(new Scanner(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest")), 12);
+        GraphDB graphDB = new GraphDB(new File(pathToBatchTest), 12);
         BreadthFirstSearch bfs = new BreadthFirstSearch(graphDB, 11);
 
         assert (bfs.distTo(7) == 1);
@@ -51,8 +53,6 @@ public class PaymoTest {
         assert bfs.pathTo(2).toString().equals("[2, 1, 7, 9, 5, 10]");
         assert !bfs.pathTo(2).toString().equals("[2, 1, 7, 6, 9, 5, 10]");
 
-
-
         bfs = new BreadthFirstSearch(graphDB, 2);
         assert (bfs.distTo(6) == 3);
         //should  be fail
@@ -60,18 +60,24 @@ public class PaymoTest {
     }
 
     public static void feature1Test() throws FileNotFoundException, UnsupportedEncodingException {
-        antifraud app = new antifraud(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest"), 12);
-        app.feature1(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/features.test"));
+        int lines = 1;
+        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+        app.feature1(new File(pathToFeatureTest));
+
     }
 
     public static void feature2Test() throws FileNotFoundException, UnsupportedEncodingException {
-        antifraud app = new antifraud(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest"), 12);
-        app.feature2(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/features.test"));
+        int lines = 1;
+
+        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+        app.feature2(new File(pathToFeatureTest));
     }
 
     public static void feature3Test() throws FileNotFoundException, UnsupportedEncodingException {
-        antifraud app = new antifraud(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest"), 12);
-        app.feature3(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/features.test"));
+        int lines = 1;
+
+        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+        app.feature3(new File(pathToFeatureTest));
     }
 
     public static void main(String[] args) {
