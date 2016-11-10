@@ -1,7 +1,8 @@
 package app.tests;
 
-import app.BreadthFirstPaths;
-import app.Graph;
+import app.BreadthFirstSearch;
+import app.GraphDB;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -13,20 +14,21 @@ import java.util.Scanner;
 public class DWTest {
 
     public static void graphTest() throws FileNotFoundException {
-        Graph graph = new Graph(new Scanner(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest")), 12);
+        GraphDB graphDB = new GraphDB(new Scanner(new File("/Users/trierra/work/insight/digital-wallet/src/main/java/app/tests/graphTest")), 12);
 
-        BreadthFirstPaths bfs = new BreadthFirstPaths(graph, 11);
-        System.out.println(bfs.distTo(7));
+        BreadthFirstSearch bfs = new BreadthFirstSearch(graphDB, 11);
         assert (bfs.distTo(7) == 1);
         assert (bfs.distTo(6) == 2);
-        bfs = new BreadthFirstPaths(graph, 9);
+        bfs = new BreadthFirstSearch(graphDB, 9);
         assert (bfs.distTo(4) == 2);
         assert (bfs.distTo(6) == 1);
         assert (bfs.distTo(2) == 4);
         assert bfs.distTo(3) == 2;
 
-        bfs = new BreadthFirstPaths(graph, 2);
+        bfs = new BreadthFirstSearch(graphDB, 2);
         assert (bfs.distTo(6) == 3);
+        //should fail
+//        assert (bfs.distTo(6) == 1);
     }
 
     public static void main(String[] args) {

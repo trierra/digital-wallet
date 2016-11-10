@@ -2,25 +2,25 @@ package app;
 
 import java.util.Stack;
 
-public class BreadthFirstPaths {
+public class BreadthFirstSearch {
     private static final int INFINITY = Integer.MAX_VALUE;
     private boolean[] marked;  // marked[v] = is there an s-v path
     private int[] edgeTo;      // edgeTo[v] = previous edge on shortest s-v path
     private int[] distTo;      // distTo[v] = number of edges shortest s-v path
 
-    public BreadthFirstPaths(Graph G, int s) {
-        marked = new boolean[G.V()];
-        distTo = new int[G.V()];
-        edgeTo = new int[G.V()];
+    public BreadthFirstSearch(GraphDB G, int s) {
+        marked = new boolean[G.getVertexes()];
+        distTo = new int[G.getVertexes()];
+        edgeTo = new int[G.getVertexes()];
         bfs(G, s);
 //        assert check(G, s);
     }
 
 
     // breadth-first search from a single source
-    private void bfs(Graph G, int s) {
+    private void bfs(GraphDB G, int s) {
         Queue<Integer> q = new Queue<Integer>();
-        for (int v = 0; v < G.V(); v++)
+        for (int v = 0; v < G.getVertexes(); v++)
             distTo[v] = INFINITY;
         distTo[s] = 0;
         marked[s] = true;
@@ -28,7 +28,7 @@ public class BreadthFirstPaths {
 
         while (!q.isEmpty()) {
             int v = q.dequeue();
-            for (int w : G.adj(v)) {
+            for (int w : G.getAdjacencyList(v)) {
                 if (!marked[w]) {
                     edgeTo[w] = v;
                     distTo[w] = distTo[v] + 1;
@@ -59,7 +59,7 @@ public class BreadthFirstPaths {
 
 
 //    // check optimality conditions for single source
-//    private boolean check(Graph G, int s) {
+//    private boolean check(GraphDB G, int s) {
 //
 //        // check that the distance of s = 0
 //        if (distTo[s] != 0) {
@@ -69,8 +69,8 @@ public class BreadthFirstPaths {
 //
 //        // check that for each edge v-w dist[w] <= dist[v] + 1
 //        // provided v is reachable from s
-//        for (int v = 0; v < G.V(); v++) {
-//            for (int w : G.adj(v)) {
+//        for (int v = 0; v < G.getVertexes(); v++) {
+//            for (int w : G.getAdjacencyList(v)) {
 //                if (hasPathTo(v) != hasPathTo(w)) {
 //                    System.out.println("edge " + v + "-" + w);
 //                    System.out.println("hasPathTo(" + v + ") = " + hasPathTo(v));
@@ -88,7 +88,7 @@ public class BreadthFirstPaths {
 //
 //        // check that v = edgeTo[w] satisfies distTo[w] = distTo[v] + 1
 //        // provided v is reachable from s
-//        for (int w = 0; w < G.V(); w++) {
+//        for (int w = 0; w < G.getVertexes(); w++) {
 //            if (!hasPathTo(w) || w == s) continue;
 //            int v = edgeTo[w];
 //            if (distTo[w] != distTo[v] + 1) {
