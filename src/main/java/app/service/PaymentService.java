@@ -15,6 +15,8 @@ public class PaymentService {
         int user1 = users[0];
         int user2 = users[1];
         BreadthFirstSearch bfs = new BreadthFirstSearch(graphDB, user1);
-        return bfs.distTo(user2);
+        int dist = bfs.distTo(user2);
+        System.out.println("Payment between " + user1 + " and " + user2 + ". Distance = " + dist + " with path " + bfs.pathTo((user2)));
+        return dist;
     }
 }

@@ -51,17 +51,17 @@ function setup_testing_input_output {
 
   rm -r ${TEST_OUTPUT_PATH}/paymo_input/*
   rm -r ${TEST_OUTPUT_PATH}/paymo_output/*
-  cp -r ${GRADER_ROOT}/app.tests/${test_folder}/paymo_input/batch_payment.txt ${TEST_OUTPUT_PATH}/paymo_input/batch_payment.txt
-  cp -r ${GRADER_ROOT}/app.tests/${test_folder}/paymo_input/stream_payment.txt ${TEST_OUTPUT_PATH}/paymo_input/stream_payment.txt
+  cp -r ${GRADER_ROOT}/tests/${test_folder}/paymo_input/batch_payment.txt ${TEST_OUTPUT_PATH}/paymo_input/batch_payment.txt
+  cp -r ${GRADER_ROOT}/tests/${test_folder}/paymo_input/stream_payment.txt ${TEST_OUTPUT_PATH}/paymo_input/stream_payment.txt
 }
 
 function compare_outputs {
   PROJECT_ANSWER_PATH1=${GRADER_ROOT}/temp/paymo_output/output1.txt
   PROJECT_ANSWER_PATH2=${GRADER_ROOT}/temp/paymo_output/output2.txt
   PROJECT_ANSWER_PATH3=${GRADER_ROOT}/temp/paymo_output/output3.txt
-  TEST_ANSWER_PATH1=${GRADER_ROOT}/app.tests/${test_folder}/paymo_output/output1.txt
-  TEST_ANSWER_PATH2=${GRADER_ROOT}/app.tests/${test_folder}/paymo_output/output2.txt
-  TEST_ANSWER_PATH3=${GRADER_ROOT}/app.tests/${test_folder}/paymo_output/output3.txt
+  TEST_ANSWER_PATH1=${GRADER_ROOT}/tests/${test_folder}/paymo_output/output1.txt
+  TEST_ANSWER_PATH2=${GRADER_ROOT}/tests/${test_folder}/paymo_output/output2.txt
+  TEST_ANSWER_PATH3=${GRADER_ROOT}/tests/${test_folder}/paymo_output/output3.txt
 
   DIFF_RESULT1=$(diff -bB ${PROJECT_ANSWER_PATH1} ${TEST_ANSWER_PATH1} | wc -l)
   if [ "${DIFF_RESULT1}" -eq "0" ] && [ -f ${PROJECT_ANSWER_PATH1} ]; then
@@ -92,11 +92,11 @@ function compare_outputs {
 }
 
 function run_all_tests {
-  TEST_FOLDERS=$(ls ${GRADER_ROOT}/app.tests)
+  TEST_FOLDERS=$(ls ${GRADER_ROOT}/tests)
   NUM_TESTS=$(($(echo $(echo ${TEST_FOLDERS} | wc -w)) * 3))
   PASS_CNT=0
 
-  # Loop through all app.tests
+  # Loop through all tests
   for test_folder in ${TEST_FOLDERS}; do
 
     setup_testing_input_output
@@ -108,7 +108,7 @@ function run_all_tests {
     compare_outputs
   done
 
-  echo "[$(date)] ${PASS_CNT} of ${NUM_TESTS} app.tests passed" >> ${GRADER_ROOT}/results.txt
+  echo "[$(date)] ${PASS_CNT} of ${NUM_TESTS} tests passed" >> ${GRADER_ROOT}/results.txt
 }
 
 check_project_struct

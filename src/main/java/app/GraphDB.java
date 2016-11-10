@@ -24,6 +24,11 @@ public class GraphDB {
         while (in.hasNext()) {
             String line = in.nextLine();
             int[] vertexArray = parseInputData(line);
+
+            if (vertexArray == null) {
+                continue;
+            }
+
             try {
                 int vertex1 = vertexArray[0];
                 int vertex2 = vertexArray[1];
@@ -50,6 +55,8 @@ public class GraphDB {
         validateVertex(v);
         return adj[v];
     }
+
+
 
     public int getVertexes() {
         return vertexes;
