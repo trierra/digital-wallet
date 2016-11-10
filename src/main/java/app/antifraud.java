@@ -5,6 +5,7 @@ import app.service.PaymentService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 import static app.Utils.parseInputData;
 
 /**
@@ -24,19 +25,25 @@ public class antifraud {
         this.paymentService = new PaymentService();
     }
 
+    //TODO: write output to file and read from test
     public void feature1(File inputData) throws FileNotFoundException {
         Scanner sc = new Scanner(inputData);
         sc.nextLine();
         while (sc.hasNext()) {
 
             int distance = paymentService.makePayment(parseInputData(sc.nextLine()), this.graphDB);
-            if (distance != 1) {
+
+            if (distance == 0) {
+                System.out.println("Would you like to pay yourself?");
+            } else if (distance != 1) {
                 System.out.println("unverified");
             } else {
                 System.out.println("trusted");
             }
         }
     }
+
+    //TODO: write output to file and read from test
 
     public void feature2(File inputData) throws FileNotFoundException {
         Scanner sc = new Scanner(inputData);
@@ -44,7 +51,9 @@ public class antifraud {
         while (sc.hasNext()) {
 
             int distance = paymentService.makePayment(parseInputData(sc.nextLine()), this.graphDB);
-            if (distance != 2) {
+            if (distance == 0) {
+                System.out.println("Would you like to pay yourself?");
+            } else if (distance != 2) {
                 System.out.println("unverified");
             } else {
                 System.out.println("trusted");
@@ -52,6 +61,7 @@ public class antifraud {
         }
     }
 
+    //TODO: write output to file and read from test
     public void feature3(File inputData) throws FileNotFoundException {
         Scanner sc = new Scanner(inputData);
         sc.nextLine();
@@ -59,7 +69,9 @@ public class antifraud {
 
             int distance = paymentService.makePayment(parseInputData(sc.nextLine()), this.graphDB);
 
-            if (distance > 4) {
+            if (distance == 0) {
+                System.out.println("Would you like to pay yourself?");
+            } else if (distance > 4) {
                 System.out.println("unverified");
             } else {
                 System.out.println("trusted");
