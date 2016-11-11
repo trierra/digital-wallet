@@ -1,5 +1,9 @@
 package app.service.serviceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * Created by trierra on 11/9/16 for
  * wallet.
@@ -29,5 +33,35 @@ public class Utils {
         }
 
         return result;
+    }
+
+    /**
+     * Detecting graph size according to max user id
+     * @param batchPayment - input data
+     * @return
+     * @throws FileNotFoundException
+     */
+    public static int detectGraphSize(File batchPayment) throws FileNotFoundException {
+        int max = 0;
+        Scanner in = new Scanner(batchPayment);
+        //skip first line
+        in.nextLine();
+
+        while (in.hasNext()) {
+            String line = in.nextLine();
+
+            int[] vertexArray = parseInputData(line);
+
+            if (vertexArray != null) {
+                try {
+                    if (max < Math.max(vertexArray[0], vertexArray[1])) {
+                        max = Math.max(vertexArray[0], vertexArray[1]);
+                    }
+                } catch (NumberFormatException x) {
+                    System.err.println("Couldn't parse line: " + line + ", " + x.getMessage());
+                }
+            }
+        }
+        return max;
     }
 }

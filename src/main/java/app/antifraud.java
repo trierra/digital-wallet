@@ -23,8 +23,8 @@ public class antifraud {
     private GraphDB graphDB;
     private PaymentService paymentService;
 
-    public antifraud(File file, int graphSize) throws FileNotFoundException {
-        this.graphDB = new GraphDB(file, graphSize);
+    public antifraud(File file) throws FileNotFoundException {
+        this.graphDB = new GraphDB(file);
         this.paymentService = new PaymentService();
     }
 
@@ -90,7 +90,7 @@ public class antifraud {
     public static void main(String[] args) {
         try {
             //TODO: count file size
-            antifraud app = new antifraud(new File("/Users/trierra/work/insight/digital-wallet/paymo_input/batch_payment.csv"), 3938361);
+            antifraud app = new antifraud(new File("/Users/trierra/work/insight/digital-wallet/paymo_input/batch_payment.csv"));
             File inputData = new File("/Users/trierra/work/insight/digital-wallet/paymo_input/stream_payment.txt");
 
             app.feature1(inputData);

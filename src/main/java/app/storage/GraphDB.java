@@ -1,5 +1,7 @@
 package app.storage;
 
+import app.service.serviceUtils.Utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
@@ -20,18 +22,18 @@ public class GraphDB {
      * Processing data to create a graph of initial state
      *
      * @param batchPayment - initial state daya
-     * @param vertexes     -size of graph
      * @throws FileNotFoundException
      */
-    public GraphDB(File batchPayment, int vertexes) throws FileNotFoundException {
-
-        this.vertexes = vertexes;
+    public GraphDB(File batchPayment) throws FileNotFoundException {
+        this.vertexes = Utils.detectGraphSize(batchPayment) + 1;
         adj = (LinkedList<Integer>[]) new LinkedList[vertexes];
         for (int v = 0; v < vertexes; v++) {
             adj[v] = new LinkedList<Integer>();
         }
         connectData(batchPayment);
     }
+
+
 
     /**
      * Fill graph with data
@@ -69,6 +71,7 @@ public class GraphDB {
 
     /**
      * Add edges between vertexes
+     *
      * @param vertex1
      * @param vertex2
      */
@@ -81,6 +84,7 @@ public class GraphDB {
 
     /**
      * Returns list of connections for each vertex
+     *
      * @param v - vertex
      * @return
      */

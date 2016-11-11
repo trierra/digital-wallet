@@ -1,11 +1,13 @@
 package app.tests;
 
-import app.service.serviceUtils.BreadthFirstSearch;
-import app.storage.GraphDB;
 import app.antifraud;
+import app.service.serviceUtils.BreadthFirstSearch;
+import app.service.serviceUtils.Utils;
+import app.storage.GraphDB;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -14,12 +16,13 @@ import java.io.UnsupportedEncodingException;
  */
 public class PaymoTest {
 
-    static String pathToBatchTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/batch_test.txt";
-    static String pathToFeatureTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/features.test";
+    private static String pathToBatchTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/batch_test.txt";
+    private static String pathToFeatureTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/features.test";
+    private static String pathToGraphSizeTest = "/Users/trierra/work/insight/digital-wallet/insight_testsuite/tests/test-1-paymo-trans/paymo_input/test_graph_size.txt";
 
 
     public static void graphTest() throws FileNotFoundException {
-        GraphDB graphDB = new GraphDB(new File(pathToBatchTest), 12);
+        GraphDB graphDB = new GraphDB(new File(pathToBatchTest));
         BreadthFirstSearch bfs = new BreadthFirstSearch(graphDB, 11);
 
         assert (bfs.distTo(7) == 1);
@@ -59,25 +62,26 @@ public class PaymoTest {
 //        assert (bfs.distTo(6) == 1);
     }
 
-    public static void feature1Test() throws FileNotFoundException, UnsupportedEncodingException {
-        int lines = 1;
-        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+    public static void feature1Test() throws IOException {
+        antifraud app = new antifraud(new File(pathToBatchTest));
         app.feature1(new File(pathToFeatureTest));
 
     }
 
     public static void feature2Test() throws FileNotFoundException, UnsupportedEncodingException {
-        int lines = 1;
-
-        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+        antifraud app = new antifraud(new File(pathToBatchTest));
         app.feature2(new File(pathToFeatureTest));
     }
 
     public static void feature3Test() throws FileNotFoundException, UnsupportedEncodingException {
-        int lines = 1;
-
-        antifraud app = new antifraud(new File(pathToBatchTest), 12);
+        antifraud app = new antifraud(new File(pathToBatchTest));
         app.feature3(new File(pathToFeatureTest));
+    }
+
+
+    public static void testGraphSize() throws FileNotFoundException {
+        int max = 1057366;
+        assert Utils.detectGraphSize(new File(pathToGraphSizeTest)) == max;
     }
 
     public static void main(String[] args) {
@@ -90,9 +94,13 @@ public class PaymoTest {
             System.out.println("------------------------------------------------");
 
             feature3Test();
+            System.out.println("------------------------------------------------");
+
+            testGraphSize();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
